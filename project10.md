@@ -10,7 +10,7 @@
 
 ### PROJECT 10: Load Balancer Solution With Nginx and SSL/TLS
 
-### Steps:
+### Step 1 - Configure Nginx as a Load Balancer
 
 1. Create an EC2 VM based on Ubuntu Server 20.04 LTS and name it Project10-nginx-lb (do not forget to open TCP port 80 for HTTP connections, also open TCP port 443 – this port is used for secured HTTPS connections)
 
@@ -61,4 +61,21 @@ server {
 `sudo systemctl status nginx`
 
 ![nginx status](./images/nginx-status.jpg)
+
+
+### Step 2 - Register a new domain name and configure secured connection using SSL/TLS certificates.
+
+1. Register a new domain name with any registrar of your choice in any domain zone (e.g. .com, .net, .org, .edu, .info, .xyz or any other)
+
+2. Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP
+
+3. Create hosted zone through Route 53 on AWS - a public hosted zone determines how traffic is routed to the internet.
+
+![route 53 hosted zone](./images/route53-hosted-zone.jpg)
+
+4. Connect Route 53 hosted zone to domain - copy nameservers from route 53 to domain nameservers
+
+![nameservers change](./images/nameservers-change.jpg)
+
+5. Update A record in the registrar to point to Nginx LB using Elastic IP address
 
